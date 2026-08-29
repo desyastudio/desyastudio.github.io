@@ -1620,11 +1620,11 @@
 
             <a
               id="emailLink"
-              href="mailto:desyastudio@gmail.com"
+              href="mailto:desysstudio@gmail.com"
             >
 
               <span id="emailDisplay">
-                desyastudio@gmail.com
+                desysstudio@gmail.com
               </span>
 
             </a>
@@ -1722,58 +1722,57 @@
 
     <!-- ENQUIRY FORM -->
 
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form
+      class="form"
+      id="leadForm"
+      onsubmit="submitLead(event)"
+    >
 
-    <!-- REQUIRED: Your Access key here. Don't worry this can be public -->
-    <!-- Create your Access key here: https://web3forms.com/ -->
-    <!-- <input type="hidden" name="apikey" value="YOUR_ACCESS_KEY_HERE"> -->
-    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+      <div class="formGrid">
 
-    <!-- Optional: Can be type="hidden" or type="text" for subject -->
-    <input type="hidden" name="subject" value="New Submission from Web3Forms">
-  
-    <!-- Optional: From Name you want to see in the email
-          Default is "Notifications". you can overwrite here -->
-    <input type="hidden" name="from_name" value="Your Website Name">
-  
-    <!-- Optional: To send the form submission as CC email -->
-    <input type="hidden" name="ccemail" value="partner@example.com">
+        <div class="field">
 
-    <!-- Optional: default replyto will be "email" (if available), 
-         you may overwrite here -->
-    <input type="hidden" name="replyto" value="customer@example.com">
+          <label for="leadName">
+            Name *
+          </label>
 
-    <!-- Required: if submitting without Javascript 
-         (because by default web3form outputs json) -->
+          <input
+            id="leadName"
+            required
+            autocomplete="name"
+          >
 
-    <!-- If javascript, use "window.location.hash" for redirects -->
-    <input type="hidden" name="redirect" value="https://web3forms.com/success">
+        </div>
 
-    <!-- Optional: But Recommended: To Prevent SPAM Submission. 
-         Make sure its hidden by default -->
-    <input type="checkbox" name="botcheck" id="" style="display: none;">
-    
-    <!-- Webhooks: Send your form data to Notion, Google Sheets or Zapier.
-         This feature available to PRO & Starter Plan users only -->
-    <input type="hidden" name="webhook" value="WEBHOOK_URL_HERE" />
 
-    <!-- Google reCaptcha v3: To Prevent SPAM Submission.PRO Plan only -->
-    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-    
-    <!-- Attachments: Make sure the <form> has enctype="multipart/form-data"
-         This feature available to PRO Plan users only -->
-    <input type="file" name="attachment" />
+        <div class="field">
 
-    <!-- Custom Form Data: 
-     Then you can include your own form data you wish to receive in email. -->
-    <input type="email" name="email" required>
-    <input type="text" name="First Name" required>
-    <input type="text" name="Phone Number" required>
-    <textarea name="message" cols="30" rows="10" required></textarea>
+          <label for="leadEmail">
+            Email *
+          </label>
 
-    <button type="submit">Submit Form</button>
+          <input
+            id="leadEmail"
+            type="email"
+            required
+            autocomplete="email"
+          >
 
-</form>
+        </div>
+
+
+        <div class="field">
+
+          <label for="leadPhone">
+            Phone *
+          </label>
+
+          <input
+            id="leadPhone"
+            required
+            autocomplete="tel"
+          >
+
         </div>
 
 
@@ -1801,14 +1800,12 @@
             </option>
 
             <option>
-              ₹3L – ₹5L
+              ₹2.5L – ₹5L
             </option>
 
-             <option>
+            <option>
               ₹5L – ₹10L
             </option>
-
-
             
             <option>
               ₹10L – ₹20L
