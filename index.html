@@ -1,122 +1,2266 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Desya Design Studio</title>
-</head>
-<body>
-  <h1>Welcome to Desya Design Studio</h1>
-  <p>We design beautiful interiors. Book your consultation today!</p>
-  <p>Call: +91 79818 63571 | Email: desyastudio@gmail.com</p>
-</body>
-</html>
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Desya Design Studio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Desya Design Studio | Interior Design Studio Bengaluru</title>
+
+  <meta
+    name="description"
+    content="Desya Design Studio creates refined residential and commercial interiors in Bengaluru, including turnkey interior design services in Indiranagar, Whitefield and Koramangala."
+  />
+
+  <meta
+    name="keywords"
+    content="interior designer Bengaluru, interior design Indiranagar, interior designer Whitefield, interior design Koramangala, turnkey interiors Bengaluru, Desya Design Studio"
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
+    :root {
+      --cream: #f5f0e8;
+      --cream-light: #fbf8f2;
+      --charcoal: #242523;
+      --slate: #383a37;
+      --brass: #a58a5b;
+      --brass-dark: #806a42;
+      --white: #ffffff;
+      --border: rgba(36, 37, 35, 0.14);
+
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+
+      --container: 1240px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
+      font-family: var(--sans);
+      background: var(--cream-light);
+      color: var(--charcoal);
+      line-height: 1.6;
     }
-    header {
-      background-color: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    nav a {
-      color: white;
-      margin: 0 15px;
+
+    a {
+      color: inherit;
       text-decoration: none;
-      font-weight: bold;
     }
-    section {
-      padding: 40px;
-      max-width: 900px;
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 48px));
       margin: auto;
     }
-    h1, h2 {
-      color: #444;
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(251, 248, 242, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .services, .portfolio, .contact {
-      margin-bottom: 50px;
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
     }
-    .portfolio img {
-      width: 250px;
-      margin: 10px;
-      border-radius: 8px;
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
     }
-    footer {
-      background-color: #222;
+
+    .logo span {
+      display: block;
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+      margin-top: -5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--brass-dark);
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      background: var(--charcoal);
       color: white;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      transition: all 0.25s ease;
+    }
+
+    .btn:hover {
+      background: var(--brass-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--charcoal);
+      color: var(--charcoal);
+    }
+
+    .btn-outline:hover {
+      color: white;
+      border-color: var(--brass-dark);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: calc(100vh - 78px);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      background: var(--cream);
+    }
+
+    .hero-image {
+      min-height: 680px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      transition: transform 1s ease;
+    }
+
+    .hero-image:hover img {
+      transform: scale(1.025);
+    }
+
+    .image-label {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 14px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      padding: 80px;
+    }
+
+    .eyebrow {
+      color: var(--brass-dark);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(48px, 6vw, 84px);
+      line-height: 0.98;
+      font-weight: 400;
+      letter-spacing: -2.5px;
+      max-width: 650px;
+    }
+
+    .hero-description {
+      max-width: 500px;
+      margin-top: 30px;
+      color: #555752;
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 30px;
+      margin-top: 55px;
+      padding-top: 25px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-number {
+      font-family: var(--serif);
+      font-size: 28px;
+    }
+
+    .meta-label {
+      font-size: 10px;
+      color: #6b6d68;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 110px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+      margin-bottom: 55px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+    }
+
+    .section-description {
+      max-width: 430px;
+      color: #656761;
+      font-size: 14px;
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services {
+      background: var(--cream-light);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--cream);
+      padding: 48px;
+      min-height: 390px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(30,30,30,0.07);
+    }
+
+    .service-number {
+      color: var(--brass-dark);
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .service-card h3 {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 400;
+      margin: 20px 0;
+    }
+
+    .service-card p {
+      color: #656761;
+      max-width: 500px;
+    }
+
+    .service-list {
+      margin-top: 30px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .service-tag {
+      border: 1px solid var(--border);
+      padding: 7px 11px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* =========================
+       PORTFOLIO
+    ========================= */
+
+    .portfolio {
+      background: var(--charcoal);
+      color: white;
+    }
+
+    .portfolio .section-description {
+      color: #b5b7b1;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      background: #30312f;
+    }
+
+    .portfolio-item.large {
+      height: 650px;
+    }
+
+    .portfolio-item.small {
+      height: 390px;
+    }
+
+    .portfolio-column {
+      display: grid;
+      gap: 18px;
+    }
+
+    .portfolio-item img {
+      transition: transform 0.8s ease;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 35px;
+      background: linear-gradient(
+        transparent,
+        rgba(0,0,0,0.75)
+      );
+    }
+
+    .portfolio-category {
+      color: #d7c29b;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .portfolio-title {
+      font-family: var(--serif);
+      font-size: 30px;
+      margin-top: 6px;
+    }
+
+    /* =========================
+       TESTIMONIAL
+    ========================= */
+
+    .testimonial {
+      background: var(--cream);
       text-align: center;
-      padding: 15px;
     }
-    .button {
-      background-color: #444;
+
+    .quote-mark {
+      font-family: var(--serif);
+      font-size: 100px;
+      color: var(--brass);
+      line-height: 0.6;
+    }
+
+    blockquote {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.2;
+      max-width: 900px;
+      margin: 40px auto;
+      font-weight: 400;
+    }
+
+    .testimonial-author {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 10px;
+      color: #6b6d68;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      background: var(--cream-light);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+    }
+
+    .contact-intro h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 58px;
+      line-height: 1.05;
+    }
+
+    .contact-intro p {
+      color: #666862;
+      margin-top: 25px;
+      max-width: 430px;
+    }
+
+    .contact-details {
+      margin-top: 45px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .detail-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--brass-dark);
+    }
+
+    .detail-value {
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .lead-form {
+      background: white;
+      padding: 45px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(30,30,30,0.04);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      color: #666862;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid #cfcfc9;
+      background: transparent;
+      padding: 12px 0;
+      outline: none;
+      color: var(--charcoal);
+      font-size: 14px;
+      border-radius: 0;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--brass);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .form-message {
+      margin-top: 15px;
+      font-size: 13px;
+      display: none;
+      color: var(--brass-dark);
+    }
+
+    /* =========================
+       MAP
+    ========================= */
+
+    .map-placeholder {
+      margin-top: 60px;
+      height: 300px;
+      background:
+        linear-gradient(rgba(36,37,35,.65), rgba(36,37,35,.65)),
+        url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
+    }
+
+    .map-placeholder-inner {
+      max-width: 450px;
+      padding: 30px;
+    }
+
+    .map-placeholder h3 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+    }
+
+    .map-placeholder p {
+      margin-top: 10px;
+      color: #ddd;
+      font-size: 13px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #1d1e1c;
+      color: white;
+      padding: 70px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 60px;
+      padding-bottom: 60px;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 32px;
+    }
+
+    .footer-description {
+      color: #aaa;
+      max-width: 350px;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .footer-heading {
+      color: #d5bd8f;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 9px;
+      margin-bottom: 18px;
+    }
+
+    .footer-list {
+      display: grid;
+      gap: 9px;
+      color: #c1c1bd;
+      font-size: 13px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      color: #777;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* =========================
+       ADMIN PANEL
+    ========================= */
+
+    .admin-trigger {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2000;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #777;
+      background: #222;
+      color: white;
+      cursor: pointer;
+      opacity: .35;
+      transition: opacity .2s;
+    }
+
+    .admin-trigger:hover {
+      opacity: 1;
+    }
+
+    .admin-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(0,0,0,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-box {
+      width: min(850px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      padding: 35px;
+    }
+
+    .admin-box h2 {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 25px;
+    }
+
+    .admin-note {
+      background: #f4efe5;
+      padding: 15px;
+      margin-bottom: 25px;
+      font-size: 12px;
+      color: #5e605b;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .admin-group {
+      margin-bottom: 15px;
+    }
+
+    .admin-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .admin-group input,
+    .admin-group textarea {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .close-admin {
+      float: right;
+      border: 0;
+      background: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 78px;
+        background: var(--cream-light);
+        border-bottom: 1px solid var(--border);
+        padding: 25px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 500px;
+        order: 1;
+      }
+
+      .hero-content {
+        order: 2;
+        padding: 65px 24px;
+      }
+
+      .service-grid,
+      .contact-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-item.large,
+      .portfolio-item.small {
+        height: 480px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-description {
+        margin-top: 20px;
+      }
+
+      .contact-grid {
+        gap: 50px;
+      }
+
+      .footer-grid {
+        gap: 40px;
+      }
+
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-group.full {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        width: min(var(--container), calc(100% - 30px));
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .hero-content {
+        padding: 55px 20px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .hero-meta {
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .service-card {
+        padding: 30px;
+        min-height: 350px;
+      }
+
+      .lead-form {
+        padding: 28px 22px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .footer-bottom {
+        display: block;
+      }
+
+      .footer-bottom div + div {
+        margin-top: 8px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Desya Design Studio</h1>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-    </nav>
+
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
+
+  <header class="navbar">
+    <div class="container nav-inner">
+
+      <a href="#home" class="logo">
+        <span>Interior Architecture</span>
+        Desya Design Studio
+      </a>
+
+      <button class="mobile-toggle" onclick="toggleMenu()">
+        ☰
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+
+        <a href="#contact" class="btn">
+          Book Consultation
+        </a>
+      </nav>
+
+    </div>
   </header>
 
-  <section id="services" class="services">
-    <h2>Our Services</h2>
-    <p>We specialize in modern, minimalist, and luxury interiors. From concept to completion, we design spaces that reflect your lifestyle.</p>
-    <ul>
-      <li>Residential Interior Design</li>
-      <li>Commercial Spaces</li>
-      <li>Custom Furniture & Decor</li>
-    </ul>
-  </section>
 
-  <section id="portfolio" class="portfolio">
-    <h2>Portfolio</h2>
-    <p>Here are some of our recent projects:</p>
-    <img src="https://via.placeholder.com/250x150?text=Living+Room" alt="Living Room">
-    <img src="https://via.placeholder.com/250x150?text=Bedroom" alt="Bedroom">
-    <img src="https://via.placeholder.com/250x150?text=Office" alt="Office">
-  </section>
+  <!-- =========================
+       HERO
+  ========================= -->
 
-  <section id="contact" class="contact">
-    <h2>Book a Consultation</h2>
-    <p>Call: +91 98860 00000<br>Email: studio@desya.design</p>
-    <a class="button" href="mailto:studio@desya.design">Book Now</a>
-  </section>
+  <main id="home">
+
+    <section class="hero">
+
+      <!-- IMAGE UPLOAD AREA
+           Replace the image URL below with your own image.
+           Example:
+           images/hero.jpg
+      -->
+
+      <div class="hero-image">
+
+        <img
+          id="heroImage"
+          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=90"
+          alt="Luxury interior designed by Desya Design Studio"
+        >
+
+        <div class="image-label">
+          Bengaluru · India
+        </div>
+
+      </div>
+
+
+      <div class="hero-content">
+
+        <div>
+
+          <div class="eyebrow">
+            Desya Design Studio · Bengaluru
+          </div>
+
+          <h1 id="heroTitle">
+            Spaces with soul, designed for living.
+          </h1>
+
+          <p class="hero-description" id="heroDescription">
+            Bespoke residential and commercial interiors created with
+            considered materials, timeless detailing and an unmistakable
+            sense of place.
+          </p>
+
+          <div class="hero-actions">
+
+            <a href="#contact" class="btn">
+              Book Consultation
+            </a>
+
+            <a href="#portfolio" class="btn btn-outline">
+              View Projects
+            </a>
+
+          </div>
+
+          <div class="hero-meta">
+
+            <div>
+              <div class="meta-number">01</div>
+              <div class="meta-label">Design-led</div>
+            </div>
+
+            <div>
+              <div class="meta-number">02</div>
+              <div class="meta-label">Turnkey</div>
+            </div>
+
+            <div>
+              <div class="meta-number">03</div>
+              <div class="meta-label">Bengaluru</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================= -->
+
+    <section class="services" id="services">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="eyebrow">What we do</div>
+
+            <h2 class="section-title">
+              Designed.<br>
+              Detailed.<br>
+              Delivered.
+            </h2>
+          </div>
+
+          <p class="section-description">
+            From the first sketch to the final styling, our turnkey
+            approach brings design, execution and craftsmanship together
+            under one roof.
+          </p>
+
+        </div>
+
+
+        <div class="service-grid">
+
+          <!-- SERVICE 01 -->
+
+          <article class="service-card">
+
+            <div>
+              <div class="service-number">01 / RESIDENTIAL</div>
+
+              <h3 id="residentialTitle">
+                Residential Turnkey
+              </h3>
+
+              <p id="residentialDescription">
+                Personal homes designed around how you live, combining
+                architecture, interiors, furniture, lighting and finishing
+                details into one cohesive experience.
+              </p>
+            </div>
+
+            <div class="service-list">
+
+              <span class="service-tag">Apartments</span>
+              <span class="service-tag">Villas</span>
+              <span class="service-tag">Penthouses</span>
+              <span class="service-tag">Renovations</span>
+
+            </div>
+
+          </article>
+
+
+          <!-- SERVICE 02 -->
+
+          <article class="service-card">
+
+            <div>
+              <div class="service-number">02 / COMMERCIAL</div>
+
+              <h3 id="commercialTitle">
+                Commercial Turnkey
+              </h3>
+
+              <p id="commercialDescription">
+                Thoughtful workspaces and hospitality environments designed
+                to strengthen your brand, improve experience and perform
+                beautifully every day.
+              </p>
+            </div>
+
+            <div class="service-list">
+
+              <span class="service-tag">Offices</span>
+              <span class="service-tag">Retail</span>
+              <span class="service-tag">Hospitality</span>
+              <span class="service-tag">Studios</span>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PORTFOLIO
+    ========================= -->
+
+    <section class="portfolio" id="portfolio">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="eyebrow">Selected work</div>
+
+            <h2 class="section-title">
+              Spaces we've<br>
+              brought to life.
+            </h2>
+          </div>
+
+          <p class="section-description">
+            A selection of residences and spaces where material,
+            proportion and light come together.
+          </p>
+
+        </div>
+
+
+        <div class="portfolio-grid">
+
+          <!-- LARGE PROJECT -->
+
+          <article class="portfolio-item large">
+
+            <!-- UPLOAD PORTFOLIO IMAGE HERE -->
+
+            <img
+              id="portfolioImage1"
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=90"
+              alt="The Indiranagar Penthouse"
+            >
+
+            <div class="portfolio-overlay">
+
+              <div class="portfolio-category">
+                Residential · Indiranagar
+              </div>
+
+              <div class="portfolio-title" id="portfolioTitle1">
+                The Indiranagar Penthouse
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- SECOND PROJECT -->
+
+          <div class="portfolio-column">
+
+            <article class="portfolio-item small">
+
+              <!-- UPLOAD PORTFOLIO IMAGE HERE -->
+
+              <img
+                id="portfolioImage2"
+                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=90"
+                alt="Whitefield Villa"
+              >
+
+              <div class="portfolio-overlay">
+
+                <div class="portfolio-category">
+                  Residential · Whitefield
+                </div>
+
+                <div class="portfolio-title" id="portfolioTitle2">
+                  Whitefield Villa
+                </div>
+
+              </div>
+
+            </article>
+
+
+            <article class="portfolio-item small">
+
+              <img
+                src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=90"
+                alt="Desya Design Studio interior"
+              >
+
+              <div class="portfolio-overlay">
+
+                <div class="portfolio-category">
+                  Coming Soon
+                </div>
+
+                <div class="portfolio-title">
+                  More Stories
+                </div>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TESTIMONIAL
+    ========================= -->
+
+    <section class="testimonial" id="about">
+
+      <div class="container">
+
+        <div class="quote-mark">
+          “
+        </div>
+
+        <blockquote id="testimonialText">
+          Desya transformed our home into something that feels completely
+          ours. Every material, detail and piece of furniture feels
+          intentional. The process was seamless from concept to completion.
+        </blockquote>
+
+        <div class="testimonial-author" id="testimonialAuthor">
+          — Private Client · Bengaluru
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT / LEAD FORM
+    ========================= -->
+
+    <section class="contact" id="contact">
+
+      <div class="container">
+
+        <div class="contact-grid">
+
+          <div class="contact-intro">
+
+            <div class="eyebrow">
+              Start a conversation
+            </div>
+
+            <h2>
+              Let's create<br>
+              something<br>
+              remarkable.
+            </h2>
+
+            <p>
+              Tell us a little about your project. Our design team will
+              get in touch to understand your space, aspirations and
+              requirements.
+            </p>
+
+
+            <div class="contact-details">
+
+              <div>
+                <div class="detail-label">Phone</div>
+
+                <!-- CHANGE PHONE NUMBER -->
+
+                <div class="detail-value" id="phoneDisplay">
+                  +91 98765 43210
+                </div>
+              </div>
+
+              <div>
+                <div class="detail-label">Email</div>
+
+                <!-- CHANGE EMAIL -->
+
+                <div class="detail-value" id="emailDisplay">
+                  hello@desyadesignstudio.com
+                </div>
+              </div>
+
+              <div>
+                <div class="detail-label">Studio</div>
+
+                <!-- CHANGE ADDRESS -->
+
+                <div class="detail-value" id="addressDisplay">
+                  Bengaluru, Karnataka, India
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- LEAD FORM -->
+
+          <form
+            class="lead-form"
+            id="leadForm"
+            onsubmit="submitLead(event)"
+          >
+
+            <div class="form-row">
+
+              <div class="form-group">
+
+                <label for="name">
+                  Name *
+                </label>
+
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Your name"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="email">
+                  Email *
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="phone">
+                  Phone *
+                </label>
+
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="+91"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="location">
+                  Project Location
+                </label>
+
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="Indiranagar, Whitefield..."
+                >
+
+              </div>
+
+
+              <div class="form-group full">
+
+                <label for="budget">
+                  Estimated Budget
+                </label>
+
+                <select id="budget" name="budget">
+
+                  <option value="">
+                    Select budget range
+                  </option>
+
+                  <option>
+                    ₹10L – ₹20L
+                  </option>
+
+                  <option>
+                    ₹20L – ₹40L
+                  </option>
+
+                  <option>
+                    ₹40L – ₹75L
+                  </option>
+
+                  <option>
+                    ₹75L – ₹1Cr+
+                  </option>
+
+                  <option>
+                    ₹1Cr+
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="form-group full">
+
+                <label for="message">
+                  Tell us about your project
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Property type, approximate size, timeline..."
+                ></textarea>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="btn form-submit"
+            >
+              Request Consultation
+            </button>
+
+            <div
+              class="form-message"
+              id="formMessage"
+            >
+              Thank you. We'll be in touch shortly.
+            </div>
+
+          </form>
+
+        </div>
+
+
+        <!-- MAP -->
+
+        <div class="map-placeholder">
+
+          <div class="map-placeholder-inner">
+
+            <div class="eyebrow">
+              Find our studio
+            </div>
+
+            <h3>
+              Bengaluru, Karnataka
+            </h3>
+
+            <p>
+              Replace this section with your Google Maps embed.
+            </p>
+
+            <!--
+              GOOGLE MAPS:
+
+              Replace this entire .map-placeholder section
+              with your Google Maps iframe.
+
+              Example:
+
+              <iframe
+                src="YOUR_GOOGLE_MAP_EMBED_URL"
+                width="100%"
+                height="300"
+                style="border:0;"
+                loading="lazy">
+              </iframe>
+            -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
   <footer>
-    <p>&copy; 2026 Desya Design Studio. All rights reserved.</p>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+
+          <div class="footer-logo">
+            Desya Design Studio
+          </div>
+
+          <p class="footer-description">
+            Bespoke interior architecture and turnkey design services
+            for refined residential and commercial spaces across
+            Bengaluru.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <div class="footer-heading">
+            Studio
+          </div>
+
+          <div class="footer-list">
+
+            <a href="#services">
+              Services
+            </a>
+
+            <a href="#portfolio">
+              Portfolio
+            </a>
+
+            <a href="#about">
+              About
+            </a>
+
+            <a href="#contact">
+              Book Consultation
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div class="footer-heading">
+            Bengaluru
+          </div>
+
+          <div class="footer-list">
+
+            <span>Indiranagar</span>
+            <span>Whitefield</span>
+            <span>Koramangala</span>
+            <span>HSR Layout</span>
+            <span>Jayanagar</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <div>
+          © 2026 Desya Design Studio
+        </div>
+
+        <div>
+          Bengaluru · India
+        </div>
+
+      </div>
+
+    </div>
+
   </footer>
+
+
+  <!-- =========================
+       ADMIN BUTTON
+  ========================= -->
+
+  <button
+    class="admin-trigger"
+    onclick="openAdmin()"
+    title="Admin Edit"
+  >
+    ⚙
+  </button>
+
+
+  <!-- =========================
+       ADMIN PANEL
+  ========================= -->
+
+  <div
+    class="admin-panel"
+    id="adminPanel"
+  >
+
+    <div class="admin-box">
+
+      <button
+        class="close-admin"
+        onclick="closeAdmin()"
+      >
+        ×
+      </button>
+
+      <h2>
+        Website Editor
+      </h2>
+
+      <div class="admin-note">
+        This editor saves changes in your browser using localStorage.
+        For a real online admin dashboard with login and database
+        storage, connect this website to Firebase or Supabase.
+      </div>
+
+
+      <div class="admin-grid">
+
+        <div class="admin-group full">
+
+          <label>
+            Hero Heading
+          </label>
+
+          <input
+            id="editHeroTitle"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group full">
+
+          <label>
+            Hero Description
+          </label>
+
+          <textarea
+            id="editHeroDescription"
+          ></textarea>
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Residential Title
+          </label>
+
+          <input
+            id="editResidentialTitle"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Commercial Title
+          </label>
+
+          <input
+            id="editCommercialTitle"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group full">
+
+          <label>
+            Residential Description
+          </label>
+
+          <textarea
+            id="editResidentialDescription"
+          ></textarea>
+
+        </div>
+
+
+        <div class="admin-group full">
+
+          <label>
+            Commercial Description
+          </label>
+
+          <textarea
+            id="editCommercialDescription"
+          ></textarea>
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Portfolio Project 1
+          </label>
+
+          <input
+            id="editPortfolioTitle1"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Portfolio Project 2
+          </label>
+
+          <input
+            id="editPortfolioTitle2"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group full">
+
+          <label>
+            Testimonial
+          </label>
+
+          <textarea
+            id="editTestimonial"
+          ></textarea>
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Testimonial Author
+          </label>
+
+          <input
+            id="editTestimonialAuthor"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Phone
+          </label>
+
+          <input
+            id="editPhone"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            id="editEmail"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Studio Address
+          </label>
+
+          <input
+            id="editAddress"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="admin-group full">
+
+          <label>
+            Hero Image URL
+          </label>
+
+          <input
+            id="editHeroImage"
+            type="text"
+            placeholder="https://..."
+          >
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Portfolio Image 1 URL
+          </label>
+
+          <input
+            id="editPortfolioImage1"
+            type="text"
+            placeholder="https://..."
+          >
+
+        </div>
+
+
+        <div class="admin-group">
+
+          <label>
+            Portfolio Image 2 URL
+          </label>
+
+          <input
+            id="editPortfolioImage2"
+            type="text"
+            placeholder="https://..."
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="admin-actions">
+
+        <button
+          class="btn"
+          onclick="saveAdmin()"
+        >
+          Save Changes
+        </button>
+
+        <button
+          class="btn btn-outline"
+          onclick="resetAdmin()"
+        >
+          Reset
+        </button>
+
+        <button
+          class="btn btn-outline"
+          onclick="closeAdmin()"
+        >
+          Close
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    function toggleMenu() {
+
+      document
+        .getElementById("navLinks")
+        .classList
+        .toggle("active");
+
+    }
+
+
+    /* =========================
+       ADMIN
+    ========================= */
+
+    const defaultData = {
+
+      heroTitle:
+        "Spaces with soul, designed for living.",
+
+      heroDescription:
+        "Bespoke residential and commercial interiors created with considered materials, timeless detailing and an unmistakable sense of place.",
+
+      residentialTitle:
+        "Residential Turnkey",
+
+      residentialDescription:
+        "Personal homes designed around how you live, combining architecture, interiors, furniture, lighting and finishing details into one cohesive experience.",
+
+      commercialTitle:
+        "Commercial Turnkey",
+
+      commercialDescription:
+        "Thoughtful workspaces and hospitality environments designed to strengthen your brand, improve experience and perform beautifully every day.",
+
+      portfolioTitle1:
+        "The Indiranagar Penthouse",
+
+      portfolioTitle2:
+        "Whitefield Villa",
+
+      testimonial:
+        "Desya transformed our home into something that feels completely ours. Every material, detail and piece of furniture feels intentional. The process was seamless from concept to completion.",
+
+      testimonialAuthor:
+        "— Private Client · Bengaluru",
+
+      phone:
+        "+91 98765 43210",
+
+      email:
+        "hello@desyadesignstudio.com",
+
+      address:
+        "Bengaluru, Karnataka, India",
+
+      heroImage:
+        "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=90",
+
+      portfolioImage1:
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=90",
+
+      portfolioImage2:
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=90"
+
+    };
+
+
+    function getData() {
+
+      const saved =
+        localStorage.getItem("desyaWebsiteData");
+
+      return saved
+        ? JSON.parse(saved)
+        : defaultData;
+
+    }
+
+
+    function populateAdmin() {
+
+      const data = getData();
+
+      document.getElementById("editHeroTitle").value =
+        data.heroTitle;
+
+      document.getElementById("editHeroDescription").value =
+        data.heroDescription;
+
+      document.getElementById("editResidentialTitle").value =
+        data.residentialTitle;
+
+      document.getElementById("editResidentialDescription").value =
+        data.residentialDescription;
+
+      document.getElementById("editCommercialTitle").value =
+        data.commercialTitle;
+
+      document.getElementById("editCommercialDescription").value =
+        data.commercialDescription;
+
+      document.getElementById("editPortfolioTitle1").value =
+        data.portfolioTitle1;
+
+      document.getElementById("editPortfolioTitle2").value =
+        data.portfolioTitle2;
+
+      document.getElementById("editTestimonial").value =
+        data.testimonial;
+
+      document.getElementById("editTestimonialAuthor").value =
+        data.testimonialAuthor;
+
+      document.getElementById("editPhone").value =
+        data.phone;
+
+      document.getElementById("editEmail").value =
+        data.email;
+
+      document.getElementById("editAddress").value =
+        data.address;
+
+      document.getElementById("editHeroImage").value =
+        data.heroImage;
+
+      document.getElementById("editPortfolioImage1").value =
+        data.portfolioImage1;
+
+      document.getElementById("editPortfolioImage2").value =
+        data.portfolioImage2;
+
+    }
+
+
+    function applyData() {
+
+      const data = getData();
+
+      document.getElementById("heroTitle").textContent =
+        data.heroTitle;
+
+      document.getElementById("heroDescription").textContent =
+        data.heroDescription;
+
+      document.getElementById("residentialTitle").textContent =
+        data.residentialTitle;
+
+      document.getElementById("residentialDescription").textContent =
+        data.residentialDescription;
+
+      document.getElementById("commercialTitle").textContent =
+        data.commercialTitle;
+
+      document.getElementById("commercialDescription").textContent =
+        data.commercialDescription;
+
+      document.getElementById("portfolioTitle1").textContent =
+        data.portfolioTitle1;
+
+      document.getElementById("portfolioTitle2").textContent =
+        data.portfolioTitle2;
+
+      document.getElementById("testimonialText").textContent =
+        data.testimonial;
+
+      document.getElementById("testimonialAuthor").textContent =
+        data.testimonialAuthor;
+
+      document.getElementById("phoneDisplay").textContent =
+        data.phone;
+
+      document.getElementById("emailDisplay").textContent =
+        data.email;
+
+      document.getElementById("addressDisplay").textContent =
+        data.address;
+
+      document.getElementById("heroImage").src =
+        data.heroImage;
+
+      document.getElementById("portfolioImage1").src =
+        data.portfolioImage1;
+
+      document.getElementById("portfolioImage2").src =
+        data.portfolioImage2;
+
+    }
+
+
+    function openAdmin() {
+
+      populateAdmin();
+
+      document.getElementById("adminPanel").style.display =
+        "flex";
+
+    }
+
+
+    function closeAdmin() {
+
+      document.getElementById("adminPanel").style.display =
+        "none";
+
+    }
+
+
+    function saveAdmin() {
+
+      const data = {
+
+        heroTitle:
+          document.getElementById("editHeroTitle").value,
+
+        heroDescription:
+          document.getElementById("editHeroDescription").value,
+
+        residentialTitle:
+          document.getElementById("editResidentialTitle").value,
+
+        residentialDescription:
+          document.getElementById("editResidentialDescription").value,
+
+        commercialTitle:
+          document.getElementById("editCommercialTitle").value,
+
+        commercialDescription:
+          document.getElementById("editCommercialDescription").value,
+
+        portfolioTitle1:
+          document.getElementById("editPortfolioTitle1").value,
+
+        portfolioTitle2:
+          document.getElementById("editPortfolioTitle2").value,
+
+        testimonial:
+          document.getElementById("editTestimonial").value,
+
+        testimonialAuthor:
+          document.getElementById("editTestimonialAuthor").value,
+
+        phone:
+          document.getElementById("editPhone").value,
+
+        email:
+          document.getElementById("editEmail").value,
+
+        address:
+          document.getElementById("editAddress").value,
+
+        heroImage:
+          document.getElementById("editHeroImage").value,
+
+        portfolioImage1:
+          document.getElementById("editPortfolioImage1").value,
+
+        portfolioImage2:
+          document.getElementById("editPortfolioImage2").value
+
+      };
+
+
+      localStorage.setItem(
+        "desyaWebsiteData",
+        JSON.stringify(data)
+      );
+
+
+      applyData();
+
+      alert(
+        "Changes saved successfully on this browser."
+      );
+
+      closeAdmin();
+
+    }
+
+
+    function resetAdmin() {
+
+      if (
+        confirm(
+          "Reset all website content to the original version?"
+        )
+      ) {
+
+        localStorage.removeItem(
+          "desyaWebsiteData"
+        );
+
+        applyData();
+
+        populateAdmin();
+
+      }
+
+    }
+
+
+    /* =========================
+       LEAD FORM
+    ========================= */
+
+    function submitLead(event) {
+
+      event.preventDefault();
+
+      const form =
+        document.getElementById("leadForm");
+
+      const message =
+        document.getElementById("formMessage");
+
+      /*
+        IMPORTANT:
+
+        This currently only displays a success message.
+
+        For real lead collection, connect this form to:
+
+        - Formspree
+        - Web3Forms
+        - Google Sheets
+        - Firebase
+        - Supabase
+        - Your own backend
+
+        Example Formspree:
+        <form action="YOUR_FORMSPREE_URL" method="POST">
+      */
+
+
+      message.style.display = "block";
+
+      form.reset();
+
+    }
+
+
+    /* =========================
+       INITIALIZE
+    ========================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        applyData();
+
+      }
+    );
+
+  </script>
+
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Desya Design Studio</title>
-  <style>
-    body {font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333;}
-    header {background:#222; color:#fff; padding:20px; text-align:center;}
-    nav a {color:#fff; margin:0 15px; text-decoration:none; font-weight:bold;}
-    section {padding:50px; max-width:1000px; margin:auto;}
-    h1,h2 {color:#444;}
-    .hero {background:#eee; text-align:center; padding:80px 20px;}
-    .hero h1 {font-size:40px;}
-    .button {background:#444; color:#fff; padding:12px 25px; text-decoration:none; border-radius:5px;}
-    .services ul {list-style:none; padding:0;}
-    .services li {margin:10px 0; font-weight:bold;}
-    .portfolio
+```
