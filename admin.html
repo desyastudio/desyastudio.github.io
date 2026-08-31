@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Desya Studio — Editor</title>
+<style>
+  :root{
+    --gold:#c7a66b;
+    --ink:#171916;
+    --muted:#686c66;
+    --line:#ddd;
+    --bg:#f7f7f3;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:1000px;
+    margin:0 auto;
+    padding:32px 20px 100px;
+  }
+  h1{
+    font-size:26px;
+    margin:0 0 4px;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:28px;
+  }
+  .gate{
+    max-width:360px;
+    margin:80px auto;
+    text-align:center;
+  }
+  .gate input{
+    width:100%;
+    padding:12px;
+    border:1px solid var(--line);
+    font-size:15px;
+    margin:16px 0;
+  }
+  .gate button, .primary{
+    background:var(--ink);
+    color:#fff;
+    border:0;
+    padding:12px 20px;
+    font-size:13px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .gate button:hover, .primary:hover{
+    background:var(--gold);
+  }
+  .gateError{
+    color:#b3392b;
+    font-size:13px;
+    display:none;
+    margin-top:8px;
+  }
+  #editor{
+    display:none;
+  }
+  .section{
+    border-top:1px solid var(--line);
+    padding:22px 0;
+  }
+  .section h2{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 16px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .field.full{
+    grid-column:1/-1;
+  }
+  .field label{
+    display:block;
+    font-size:11px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    margin-bottom:5px;
+  }
+  .field input,
+  .field textarea{
+    width:100%;
+    padding:9px;
+    border:1px solid var(--line);
+    background:#fff;
+    font-size:14px;
+    font-family:inherit;
+  }
+  .field textarea{
+    min-height:70px;
+    resize:vertical;
+  }
+  .fileRow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:8px;
+  }
+  .fileRow label.file{
+    border:1px solid #aaa;
+    padding:8px 12px;
+    font-size:12px;
+    cursor:pointer;
+    background:#fff;
+  }
+  .fileRow input[type=file]{
+    display:none;
+  }
+  .preview{
+    width:60px;
+    height:60px;
+    object-fit:cover;
+    border:1px solid var(--line);
+    background:#eee;
+  }
+  .bar{
+    position:sticky;
+    bottom:0;
+    background:var(--bg);
+    border-top:1px solid var(--line);
+    padding:16px 0;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-top:20px;
+  }
+  .status{
+    font-size:13px;
+  }
+  .status.ok{ color:#2f6b3a; }
+  .status.err{ color:#b3392b; }
+  a.viewLink{
+    color:var(--muted);
+    font-size:13px;
+    text-decoration:underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- PASSWORD GATE -->
+  <div class="gate" id="gate">
+    <h1>Desya Studio Editor</h1>
+    <p class="sub">Enter the admin password to continue.</p>
+    <input type="password" id="passwordInput" placeholder="Password" autocomplete="current-password">
+    <div>
+      <button onclick="tryLogin()">Unlock</button>
+    </div>
+    <div class="gateError" id="gateError"></div>
+  </div>
+
+  <!-- EDITOR -->
+  <div id="editor">
+
+    <h1>Studio Editor</h1>
+    <p class="sub">
+      Changes here go live on the website for everyone as soon as you click Save.
+      <a class="viewLink" href="/" target="_blank" rel="noopener">View live site ↗</a>
+    </p>
+
+    <div class="section">
+      <h2>Brand</h2>
+      <div class="grid">
+        <div class="field"><label>Studio name</label><input id="f_brandName"></div>
+        <div class="field"><label>Subtitle</label><input id="f_brandSub"></div>
+        <div class="field"><label>Logo letter</label><input id="f_brandMark" maxlength="2"></div>
+        <div class="field"><label>Accent colour (hex)</label><input id="f_accent"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Hero</h2>
+      <div class="grid">
+        <div class="field full"><label>Kicker</label><input id="f_heroKicker"></div>
+        <div class="field"><label>Heading (plain text, use {accent} as placeholder)</label><input id="f_heroTitle"></div>
+        <div class="field"><label>Heading accent word</label><input id="f_heroTitleAccent"></div>
+        <div class="field full"><label>Description</label><textarea id="f_heroDescription"></textarea></div>
+        <div class="field full">
+          <label>Hero image</label>
+          <input id="f_heroImage">
+          <div class="fileRow">
+            <label class="file">Upload<input type="file" accept="image/*" onchange="uploadImage(this,'f_heroImage')"></label>
+            <img class="preview" id="preview_f_heroImage">
+          </div>
+        </div>
+        <div class="field"><label>Featured category</label><input id="f_heroProjectCategory"></div>
+        <div class="field"><label>Featured title</label><input id="f_heroProjectTitle"></div>
+        <div class="field"><label>Stat 1</label><input id="f_stat1"></div>
+        <div class="field"><label>Stat 1 label</label><input id="f_statLabel1"></div>
+        <div class="field"><label>Stat 2</label><input id="f_stat2"></div>
+        <div class="field"><label>Stat 2 label</label><input id="f_statLabel2"></div>
+        <div class="field"><label>Stat 3</label><input id="f_stat3"></div>
+        <div class="field"><label>Stat 3 label</label><input id="f_statLabel3"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Services</h2>
+      <div class="grid">
+        <div class="field full"><label>Heading (use | for line breaks)</label><input id="f_servicesTitle"></div>
+        <div class="field full"><label>Description</label><textarea id="f_servicesDescription"></textarea></div>
+        <div class="field"><label>Residential title</label><input id="f_residentialTitle"></div>
+        <div class="field"><label>Commercial title</label><input id="f_commercialTitle"></div>
+        <div class="field"><label>Residential description</label><textarea id="f_residentialDescription"></textarea></div>
+        <div class="field"><label>Commercial description</label><textarea id="f_commercialDescription"></textarea></div>
+        <div class="field"><label>Residential tags (comma separated)</label><input id="f_residentialTags"></div>
+        <div class="field"><label>Commercial tags (comma separated)</label><input id="f_commercialTags"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Portfolio</h2>
+      <div class="grid">
+        <div class="field"><label>Project 1 title</label><input id="f_projectTitle1"></div>
+        <div class="field"><label>Project 1 category</label><input id="f_projectCategory1"></div>
+        <div class="field full">
+          <label>Project 1 image</label>
+          <input id="f_projectImage1">
+          <div class="fileRow">
+            <label class="file">Upload<input type="file" accept="image/*" onchange="uploadImage(this,'f_projectImage1')"></label>
+            <img class="preview" id="preview_f_projectImage1">
+          </div>
+        </div>
+
+        <div class="field"><label>Project 2 title</label><input id="f_projectTitle2"></div>
+        <div class="field"><label>Project 2 category</label><input id="f_projectCategory2"></div>
+        <div class="field full">
+          <label>Project 2 image</label>
+          <input id="f_projectImage2">
+          <div class="fileRow">
+            <label class="file">Upload<input type="file" accept="image/*" onchange="uploadImage(this,'f_projectImage2')"></label>
+            <img class="preview" id="preview_f_projectImage2">
+          </div>
+        </div>
+
+        <div class="field"><label>Project 3 title</label><input id="f_projectTitle3"></div>
+        <div class="field"><label>Project 3 category</label><input id="f_projectCategory3"></div>
+        <div class="field full">
+          <label>Project 3 image</label>
+          <input id="f_projectImage3">
+          <div class="fileRow">
+            <label class="file">Upload<input type="file" accept="image/*" onchange="uploadImage(this,'f_projectImage3')"></label>
+            <img class="preview" id="preview_f_projectImage3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>About</h2>
+      <div class="grid">
+        <div class="field full"><label>Title (use {accent} as placeholder)</label><input id="f_aboutTitle"></div>
+        <div class="field full"><label>Title accent word</label><input id="f_aboutTitleAccent"></div>
+        <div class="field full"><label>Description</label><textarea id="f_aboutDescription"></textarea></div>
+        <div class="field full"><label>About card text</label><textarea id="f_aboutCard"></textarea></div>
+        <div class="field"><label>Point 1 title</label><input id="f_pointTitle1"></div>
+        <div class="field"><label>Point 1 text</label><input id="f_pointText1"></div>
+        <div class="field"><label>Point 2 title</label><input id="f_pointTitle2"></div>
+        <div class="field"><label>Point 2 text</label><input id="f_pointText2"></div>
+        <div class="field"><label>Point 3 title</label><input id="f_pointTitle3"></div>
+        <div class="field"><label>Point 3 text</label><input id="f_pointText3"></div>
+        <div class="field"><label>Point 4 title</label><input id="f_pointTitle4"></div>
+        <div class="field"><label>Point 4 text</label><input id="f_pointText4"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Contact &amp; QR</h2>
+      <div class="grid">
+        <div class="field"><label>Phone</label><input id="f_phone"></div>
+        <div class="field"><label>Email</label><input id="f_email"></div>
+        <div class="field"><label>Instagram username (no @)</label><input id="f_instagram"></div>
+        <div class="field"><label>Address</label><input id="f_address"></div>
+        <div class="field full"><label>Contact title (use {accent} as placeholder)</label><input id="f_contactTitle"></div>
+        <div class="field full"><label>Contact title accent word</label><input id="f_contactTitleAccent"></div>
+        <div class="field full"><label>Contact description</label><textarea id="f_contactDescription"></textarea></div>
+        <div class="field full">
+          <label>QR code image (leave blank to hide)</label>
+          <input id="f_qrImage">
+          <div class="fileRow">
+            <label class="file">Upload<input type="file" accept="image/*" onchange="uploadImage(this,'f_qrImage')"></label>
+            <img class="preview" id="preview_f_qrImage">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bar">
+      <button class="primary" onclick="saveContent()">Save — publish live</button>
+      <span class="status" id="saveStatus"></span>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+"use strict";
+
+const FIELD_KEYS = [
+  "brandName","brandSub","brandMark","accent",
+  "heroKicker","heroTitle","heroTitleAccent","heroDescription","heroImage",
+  "heroProjectCategory","heroProjectTitle",
+  "stat1","statLabel1","stat2","statLabel2","stat3","statLabel3",
+  "servicesTitle","servicesDescription",
+  "residentialTitle","residentialDescription","residentialTags",
+  "commercialTitle","commercialDescription","commercialTags",
+  "projectTitle1","projectCategory1","projectImage1",
+  "projectTitle2","projectCategory2","projectImage2",
+  "projectTitle3","projectCategory3","projectImage3",
+  "aboutTitle","aboutTitleAccent","aboutDescription","aboutCard",
+  "pointTitle1","pointText1","pointTitle2","pointText2",
+  "pointTitle3","pointText3","pointTitle4","pointText4",
+  "contactTitle","contactTitleAccent","contactDescription",
+  "phone","email","instagram","address","qrImage"
+];
+
+const IMAGE_KEYS = ["heroImage","projectImage1","projectImage2","projectImage3","qrImage"];
+const MAX_UPLOAD_BYTES = 3 * 1024 * 1024;
+
+function $(id){ return document.getElementById(id); }
+
+function getPassword(){
+  return sessionStorage.getItem("desyaAdminPassword") || "";
+}
+
+async function tryLogin(){
+
+  const password = $("passwordInput").value;
+  $("gateError").style.display = "none";
+
+  try{
+
+    const response = await fetch('/api/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    });
+
+    const result = await response.json();
+
+    if(response.ok && result.ok){
+      sessionStorage.setItem("desyaAdminPassword", password);
+      $("gate").style.display = "none";
+      $("editor").style.display = "block";
+      loadContentIntoForm();
+    }else{
+      $("gateError").textContent = result.error || "Wrong password.";
+      $("gateError").style.display = "block";
+    }
+
+  }catch(error){
+    $("gateError").textContent = "Could not reach the server. Try again.";
+    $("gateError").style.display = "block";
+  }
+
+}
+
+$("passwordInput") && $("passwordInput").addEventListener("keydown", function(event){
+  if(event.key === "Enter"){
+    tryLogin();
+  }
+});
+
+async function loadContentIntoForm(){
+
+  try{
+
+    const response = await fetch('/api/content', { cache: 'no-store' });
+    const data = await response.json();
+
+    FIELD_KEYS.forEach(function(key){
+      const field = $("f_" + key);
+      if(field){
+        field.value = data[key] || "";
+      }
+    });
+
+    IMAGE_KEYS.forEach(function(key){
+      const preview = $("preview_f_" + key);
+      if(preview && data[key]){
+        preview.src = data[key];
+      }
+    });
+
+  }catch(error){
+    $("saveStatus").textContent = "Could not load current content.";
+    $("saveStatus").className = "status err";
+  }
+
+}
+
+function readFileAsDataURL(file){
+  return new Promise(function(resolve, reject){
+    const reader = new FileReader();
+    reader.onload = function(){ resolve(reader.result); };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadImage(input, fieldId){
+
+  const file = input.files && input.files[0];
+  if(!file){
+    return;
+  }
+
+  if(file.size > MAX_UPLOAD_BYTES){
+    alert("Please use an image smaller than 3MB.");
+    input.value = "";
+    return;
+  }
+
+  try{
+
+    const dataUrl = await readFileAsDataURL(file);
+
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-password': getPassword()
+      },
+      body: JSON.stringify({ filename: file.name, dataUrl: dataUrl })
+    });
+
+    const result = await response.json();
+
+    if(response.ok && result.url){
+      $(fieldId).value = result.url;
+      const preview = $("preview_" + fieldId);
+      if(preview){
+        preview.src = result.url;
+      }
+    }else{
+      alert(result.error || "Upload failed.");
+    }
+
+  }catch(error){
+    alert("Upload failed: " + error.message);
+  }finally{
+    input.value = "";
+  }
+
+}
+
+async function saveContent(){
+
+  const payload = {};
+  FIELD_KEYS.forEach(function(key){
+    const field = $("f_" + key);
+    payload[key] = field ? field.value : "";
+  });
+
+  const statusEl = $("saveStatus");
+  statusEl.textContent = "Saving...";
+  statusEl.className = "status";
+
+  try{
+
+    const response = await fetch('/api/content', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-password': getPassword()
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if(response.ok && result.ok){
+      statusEl.textContent = "Saved — live on the website now.";
+      statusEl.className = "status ok";
+    }else{
+      statusEl.textContent = result.error || "Save failed.";
+      statusEl.className = "status err";
+    }
+
+  }catch(error){
+    statusEl.textContent = "Save failed: " + error.message;
+    statusEl.className = "status err";
+  }
+
+}
+
+/* If a password is already remembered for this browser tab session,
+   skip straight to the editor. */
+if(getPassword()){
+  $("gate").style.display = "none";
+  $("editor").style.display = "block";
+  loadContentIntoForm();
+}
+</script>
+
+</body>
+</html>
