@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
-        secure: true,
+        secure: true, // true for port 465, false for 587
         auth: {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS,
@@ -16,14 +16,24 @@ export default async function handler(req, res) {
       });
 
       await transporter.sendMail({
-        from: process.env.SMTP_USER,
+        from: 'Desya Design Studio <desyastudio@gmail.com>', // sender
         to: process.env.SMTP_USER, // your inbox
+        replyTo: email, // reply goes to the person who filled the form
         subject: `New contact from ${name}`,
-        text: `Email: ${email}\nMessage: ${message}`,
+        text: `Hello Desya Studio team,
+
+You have a new enquiry from ${name} (${email}).
+
+Message:
+${message}
+
+Regards,
+Desya Design Studio Website`,
       });
 
       res.status(200).json({ success: true });
     } catch (error) {
+      console.error('Email error:', error);
       res.status(500).json({ error: error.message });
     }
   } else {
